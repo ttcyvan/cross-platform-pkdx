@@ -5,6 +5,8 @@ import { StyleSheet,ActivityIndicator, Text, View, FlatList, Image, TextInput, B
 import Pokemon from './Pokemon';
 import App from './alldata';
 import Inscription from'./inscription';
+import Connexion from './Connexion';
+import Google from './Google';
 
 const Stack = createStackNavigator();
 
@@ -13,8 +15,10 @@ export default function MyStack() {
     <NavigationContainer>
       <Stack.Navigator>
       <Stack.Screen name="Inscription" component={Inscription} />
+      <Stack.Screen name="Connexion" component={Connexion} />
       <Stack.Screen name="Tous les pokémons" component={App} />
       <Stack.Screen name="Pokemon" component={Pokemon} />
+      <Stack.Screen name="Recherche Google" component={Google} />
       </Stack.Navigator>
     </NavigationContainer>
   );

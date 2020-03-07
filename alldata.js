@@ -37,6 +37,11 @@ export default class App extends Component {
       return (
         
         <View style={style.firtDiv}>
+          <Button 
+          title="recherche google"
+          onPress={() => this.props.navigation.navigate('Recherche Google')}
+          />
+
             <FlatList 
               data={this.state.dataSource}
                 renderItem={({ item }) => (

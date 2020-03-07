@@ -16,7 +16,7 @@ const firebaseConfig = {
 
 !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
 
-export default class Inscription extends Component {
+export default class Connexion extends Component {
   constructor(props){
     super(props)
     this.state = ({
@@ -28,16 +28,23 @@ export default class Inscription extends Component {
   connexion = (email, password) =>{
     try{
       if((this.state.email !== "") && (this.state.password !== "")){
-          Alert.alert('connection reussit');
-        this.props.navigation.navigate('Connexion');
-        return;
-    
-      }else{
+
+          if(this.state.password.length<6){
+            Alert.alert('connection reussit');
+            this.props.navigation.navigate('Tous les pokémons');
+            return;
+        }
+
+        firebaseApp.auth().signInWithEmailAndPassword(email, password).then(function (user){
+       })
+
+      }
+      else{
         Alert.alert('un des champs est vide');
         return;
       }
 
-      firebase.auth().createUserWithEmailAndPassword(email, password);
+      firebase.auth().createUserWithEmailAndPassword(email, password)
     }
     catch(error){
       console.log(error.toString())
@@ -80,24 +87,26 @@ export default class Inscription extends Component {
              />
            </Item>
 
-            <Button style= {{marginTop :10}}
+           <Button style= {{marginTop :10}}
               full
               rounded
-              primary
+              success
               onPress = {()=>this.connexion(this.state.email, this.state.password)}
+              //onPress={() => Alert.alert('Simple Button pressed')}
               >
-              <Text style= {{color:'white'}}>je m'inscris</Text>
+              <Text style= {{color:'white'}}>Connexion</Text>
             </Button>
 
             <Button style= {{marginTop :10}}
               full
               rounded
-              success
-              //onPress = {()=>this.Connexion(this.state.email, this.state.password)}
-              onPress={() => this.props.navigation.navigate('Connexion')}
+              primary
+              //onPress = {()=>this.connexion(this.state.email, this.state.password)}
+              onPress={() => this.props.navigation.navigate('Inscription')}
               >
-              <Text style= {{color:'white'}}>j'ai déja un compte</Text>
+              <Text style= {{color:'white'}}>je crée mon compte</Text>
             </Button>
+
          </Form>
        </Container>
     );
